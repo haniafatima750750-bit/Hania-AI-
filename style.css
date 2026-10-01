@@ -1,0 +1,446 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500&display=swap");          
+
+:root {
+    --bg: #1A5276;
+    --glow: #AED6F1;
+    --glow-soft: rgb(1, 1, 1);
+    --text: #232748;
+    --user-bubble: linear-gradient(135deg, #050505, #050505);
+    --bot-bubble: #FDFCE8;
+}
+
+html, body, [data-testid="stApp"], [data-testid="stHeader"], [data-testid="stBottom"] > div {
+    background: var(--bg) !important;
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    color: var(--glow) !important;
+    letter-spacing: normal !important; /* Removes the wide futuristic spacing */
+    text-shadow: 0 0 8px rgb(0, 0, 0);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {  text-shadow: 0 0 6px rgba(42, 24, 18, 0.2); }
+    50% {       text-shadow: 0 0 10px rgba(21, 37, 38, 0.4); }
+}
+
+
+[data-testid="stChatMessage"] {
+    background: var(--bot-bubble);
+    border: 1px solid var(--glow-soft);
+    border-radius: 22px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.9rem;
+    box-shadow: 0 0 12px rgba(9, 9, 9, 0.15);
+}
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+    background: var(--user-bubble);
+    border-color: var(--glow);
+    border-bottom-right-radius: 6px;
+    flex-direction: row-reverse;
+    text-align: right;
+    margin-left: 15%;
+}
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+    border-bottom-left-radius: 6px;
+    margin-right: 15%;
+}
+
+[data-testid="stChatMessage"] p {
+    color: var(--text);
+}
+
+[data-testid="stChatInput"] {
+    background: #AED6F1 !important;
+    border: 1px solid var(--glow) !important;
+    border-radius: 999px !important;
+    box-shadow: 0 0 14px var(--glow-soft);
+}
+
+[data-testid="stChatInput"] div {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 999px !important;
+}
+
+[data-testid="stChatInput"] textarea {
+    color: var(--text) !important;
+    caret-color: var(--glow);
+}
+
+[data-testid="stChatInput"] button {
+    color: var(--glow) !important;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--glow-soft); border-radius: 8px; }
+
+------------------------------------------------------------------------
+
+/* 1. Ensure the container button is permanently positioned and visible */
+[data-testid="stSidebarCollapseButton"] {
+    position: fixed !important;
+    left: 20px !important;
+    top: 15px !important;
+    z-index: 999999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* 2. Hide the default plain text characters completely */
+[data-testid="stSidebarCollapseButton"] button {
+    font-size: 0 !important;
+    color: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* 3. Inject a permanent, beautiful glowing 3-line hamburger menu icon */
+[data-testid="stSidebarCollapseButton"] button::after {
+    content: "☰" !important;
+    font-size: 1.7rem !important;
+    color: #FDFCE8 !important; /* Beautiful neon cyan color */
+    font-weight: bold !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.938); /* Glowing aura effect */
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer !important;
+}
+
+/* 4. Hover effect animation settings block */
+[data-testid="stSidebarCollapseButton"] button:hover::after {
+    transform: scale(1.15);
+    color: #ffffff !important;
+    text-shadow: 0 0 15px #fdfce8, 0 0 25px #fdfce8;
+}
+
+/* Replace the expand-sidebar double arrows with the same menu icon. */
+[data-testid="stExpandSidebarButton"] svg {
+    display: none !important;
+}
+
+[data-testid="stExpandSidebarButton"]::after {
+    content: "☰" !important;
+    display: inline-block !important;
+    color: #fdfce8 !important;
+    font-size: 1.7rem !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+[data-testid="stExpandSidebarButton"]:hover::after {
+    transform: scale(1.15);
+    color: #ffffff !important;
+    text-shadow: 0 0 15px #fdfce8, 0 0 25px #fdfce8;
+}
+
+-------------------------------------------------------------------
+
+/* Tighten the gap under the main title */
+h1 {
+    margin-bottom: -15px !important;
+    padding-bottom: 0px !important;
+}
+
+/* Tighten the gap around the subtitle line */
+h2 {
+    margin-top: 0px !important;
+    margin-bottom: -5px !important;
+    padding-top: 0px !important;
+}
+----------------------------------------------------------------
+
+/* 1. Universal target for the chat send button (Locks your blue color permanently) */
+.stChatInput button, 
+.stChatInput button:disabled,
+[data-testid="stChatInputSubmitButton"] {
+    color: #2980B9 !important; /* Your custom blue color */
+    background-color: rgba(41, 128, 185, 0.2) !important; /* Soft glowing blue background capsule */
+    border-radius: 50% !important;
+    padding: 6px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-flex !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* 2. Absolute hover effect rule when your cursor mouse touches it */
+.stChatInput button:hover,
+[data-testid="stChatInputSubmitButton"]:hover {
+    color: #ffffff !important;
+    background-color: #2980B9 !important; /* Fills with your solid blue color */
+    box-shadow: 0 0 12px rgba(41, 128, 185, 0.6) !important; /* Soft neon blue glow aura */
+    transform: scale(1.1) !important;
+}
+
+-----------------------------------------------------------------
+
+/* Bring back and highlight the flashing text cursor line when typing */
+.stChatInput textarea:focus {
+    caret-color: #ffffff !important; /* Forces a crisp, clear white flashing text line */
+    color: #ffffff !important;
+}
+
+/* Optional: Give the text box border a slight glow when active */
+.stChatInputContainer:focus-within {
+    border: 1px solid #2980B9 !important;
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.4) !important;
+}
+
+-----------------------------------------------------------------------
+
+/* FORCE THE BLINKING TEXT CURSOR LINE TO SHOW UP CONSTANTLY */
+[data-testid="stChatInput"] textarea,
+.stChatInput textarea,
+.stChatInputContainer textarea {
+    caret-color: #0367a5 !important; /* Forces the vertical blinking line to be bright white */
+    color: #056baa !important;       /* Ensures your typing text remains perfectly white */
+}
+
+-------------------------------------------------------------------------
+
+/* Target the text inside the user's message bubble */
+[data-testid="stChatMessage"] div {
+    color: #fdfce8 !important;
+}
+
+/* Force every paragraph element inside the chat log to turn cream */
+.stChatMessage p {
+    color: #fdfce8 !important;
+}
+
+------------------------------------------------------------------------------
+/* 🌌 FORCE CHAT BUBBLES TO HAVE A SLEEK DARK BACKGROUND */
+.stChatMessage, 
+[data-testid="stChatMessage"] {
+    background-color: #161b22 !important; /* Premium dark background */
+    border: 1px solid #30363d !important;  /* Subtle clean borders */
+    border-radius: 16px !important;
+    padding: 16px !important;
+    margin-bottom: 15px !important;
+}
+
+/* 🎨 ENSURE YOUR GORGEOUS CREAM TEXT STANDS OUT CLEARLY */
+.stChatMessage p, 
+.stChatMessage span,
+[data-testid="stChatMessageContent"] {
+    color: #fdfce8 !important; /* Your beautiful cream text */
+    -webkit-text-fill-color: #fdfce8 !important;
+}
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"][aria-label="Chat message from user"]) > div:first-child {
+    background: #fdfce8 !important;
+}
+
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"][aria-label="Chat message from assistant"]) > div:first-child {
+    background: #fdfce8 !important;
+    border: 1px solid #111112 !important;
+    border-radius: 8px !important;
+}
+
+[data-testid="stChatMessageAvatarAssistant"],
+[data-testid="stChatMessageAvatarAssistant"] *,
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"][aria-label="Chat message from assistant"]) > div:first-child,
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"][aria-label="Chat message from assistant"]) > div:first-child * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+-----------------------------------------------------------------------------
+
+/* 🎨 FORCE THE SUBTITLE WELCOME LINE TO LIGHT UP IN CREAM COLOR */
+span[data-testid="stMarkdownContainer"] p,
+div[data-testid="stMarkdownContainer"] p,
+div blockquote p {
+    color: #fdfce8 !important;
+    -webkit-text-fill-color: #fdfce8 !important;
+    opacity: 1 !important;
+}
+
+-----------------------------------------------------------------------
+
+/* 🌌 INJECT DOCK-LEVEL CORNER GLOW EFFECT DIRECTLY ON THE CANVAS CONTAINER */
+.stAppDeployDropdown,
+.main .block-container,
+[data-testid="stAppViewContainer"] {
+    background-image: radial-gradient(circle at top left, rgba(80, 195, 245, 0.511) 0%, rgba(41, 128, 185, 0.05) 30%, transparent 60%) !important;
+}
+
+/* 🌌 DUAL-GLOW EFFECT: GEMINI CYAN TOP-LEFT & DEEP BLACK BOTTOM-RIGHT */
+.stAppDeployDropdown,
+.main .block-container,
+[data-testid="stAppViewContainer"] {
+    background-image: 
+        radial-gradient(circle at top left, rgba(0, 242, 254, 0.25) 0%, rgba(41, 128, 185, 0.05) 30%, transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.95) 0%, rgba(10, 15, 26, 0.6) 40%, transparent 70%) !important;
+    background-attachment: fixed !important;
+}
+
+------------------------------------------------------------------------
+
+/* 🌌 MAKE THE BOTTOM CHAT INPUT BAR SEAMLESS AND TRANSPARENT */
+[data-testid="stChatInputContainer"],
+.stChatInput,
+div[data-testid="stBottom"] > div {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure the main bottom sticky panel blends perfectly into your dark theme colors */
+div[data-testid="stBottom"] {
+    background: linear-gradient(to top, #000000 0%, transparent 100%) !important;
+    background-color: transparent !important;
+}
+
+-------------------------------------------------------------------
+
+/* 🌌 KEEP THE PANEL SEAMLESS BUT RE-INJECT A SLEEK BLACK CHAT INPUT CAPSULE */
+div[data-testid="stBottom"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+div[data-testid="stBottom"] > div {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* 🎨 THE CHAT INPUT FIELD CAPSULE IN PURE BLACK */
+[data-testid="stChatInputContainer"] {
+    background-color: #000000 !important; /* Forces a solid black chat input field container box */
+    border: 1px solid #1f2937 !important;  /* Add a very subtle, clean slate border */
+    border-radius: 24px !important;        /* Keeps the beautiful curved pill capsule look */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important; /* Soft depth shadow underneath */
+}
+
+[data-testid="stChatInput"] {
+    background: #000000 !important;
+}
+
+/* Polished dark sidebar panel and menu controls */
+[data-testid="stSidebar"] {
+    background: #0b0f14 !important;
+    border-right: 1px solid #30363d !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
+[data-testid="stSidebar"] label {
+    color: #fdfce8 !important;
+}
+
+[data-testid="stSidebar"] h3 {
+    color: #fdfce8 !important;
+    text-shadow: none !important;
+    animation: none !important;
+    letter-spacing: normal !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
+    background: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 10px !important;
+}
+
+[data-testid="stSidebar"] button {
+    border: 1px solid #30363d !important;
+    border-radius: 10px !important;
+    background: #161b22 !important;
+    color: #fdfce8 !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+[data-testid="stSidebar"] button:hover {
+    background: #242c36 !important;
+    border-color: #fdfce8 !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stExpandSidebarButton"] {
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000000 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button::after,
+[data-testid="stExpandSidebarButton"]::after {
+    color: #fdfce8 !important;
+    text-shadow: none !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button:hover,
+[data-testid="stExpandSidebarButton"]:hover {
+    background: #161b22 !important;
+    border-color: #fdfce8 !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stExpandSidebarButton"] {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button::after,
+[data-testid="stExpandSidebarButton"]::after {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.3rem !important;
+    line-height: 1 !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button:hover::after,
+[data-testid="stExpandSidebarButton"]:hover::after {
+    transform: none !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button > *,
+[data-testid="stExpandSidebarButton"] > * {
+    display: none !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stExpandSidebarButton"] {
+    position: relative !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button::after,
+[data-testid="stExpandSidebarButton"]::after {
+    position: absolute !important;
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    margin: auto !important;
+    display: grid !important;
+    place-items: center !important;
+}
+
+[data-testid="stChatInput"] textarea,
+.stChatInput textarea,
+.stChatInputContainer textarea {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
